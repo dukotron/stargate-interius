@@ -1,5 +1,7 @@
 package interius.tiles;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class TileMapLoader {
     
     // ovdje stavi da u constructor stavis od cega loadat
@@ -15,7 +17,7 @@ public class TileMapLoader {
     }
     
     // mozda u argumente gdje je kamera? pogledati kako radi libgdx kamera
-    public void render() {
+    public void render(SpriteBatch batch) {
         
     }
     
