@@ -3,7 +3,6 @@ package interius.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import interius.game.states.GameState;
 import interius.game.states.GameStateSpace;
@@ -15,6 +14,7 @@ public class Interius extends ApplicationAdapter {
     
     @Override
     public void create() {
+        FontLoader.initialize();
         setState(new GameStateSpace());
     }
 
@@ -29,6 +29,10 @@ public class Interius extends ApplicationAdapter {
     @Override
     public void dispose() {
         currentState.dispose();
+    }
+    
+    public void resize(int w, int h) {
+        currentState.resize(w, h);
     }
     
     public void setState(GameState s) {

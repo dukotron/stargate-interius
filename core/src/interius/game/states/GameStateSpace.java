@@ -18,20 +18,24 @@ public class GameStateSpace extends GameState{
 
     public void create() {
         batch = new SpriteBatch();
-        camera = new OrthographicCamera(800, 600);
+        camera = new OrthographicCamera(1280, 720);
         viewport = new ExtendViewport(1280, 720, camera);
         img = new Texture("badlogic.jpg");
-        FontLoader.initialize();
     }
 
     public void render() {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
+        batch.setTransformMatrix(camera.view);
+        
         batch.begin();
+        
+        
         batch.draw(img, 0, 0);
-        System.out.print(Gdx.graphics.getWidth());
-        FontLoader.defaultFont.draw(batch, new Integer(Gdx.graphics.getFramesPerSecond()).toString(),
-                (-viewport.getScreenWidth() / 2) + 5, (viewport.getScreenHeight() / 2) - 5);
+        FontLoader.defaultFont.draw(batch, new Integer(Gdx.graphics.getFramesPerSecond()).toString(), -1280/2 + 20, 720/2 - 20);
+      //          (-viewport.getScreenWidth() / 2) + 5, (viewport.getScreenHeight() / 2) - 5);
+        
+        
         batch.end();
     }
 

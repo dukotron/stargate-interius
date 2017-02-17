@@ -1,7 +1,5 @@
 package interius.game.states;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import interius.tiles.TileMapLoader;
 
 public class GameStateTerrain extends GameState {
@@ -22,5 +20,9 @@ public class GameStateTerrain extends GameState {
 
     public void dispose() {
         map.dispose();
+    }
+
+    public void resize(int w, int h) {
+        
     }
 }

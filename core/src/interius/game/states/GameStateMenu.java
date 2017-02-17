@@ -1,7 +1,5 @@
 package interius.game.states;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 public class GameStateMenu extends GameState {
 
     public void create() {
@@ -13,6 +11,10 @@ public class GameStateMenu extends GameState {
     }
 
     public void dispose() {
+        
+    }
+    
+    public void resize(int w, int h) {
         
     }
 
