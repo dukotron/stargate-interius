@@ -4,17 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import interius.resources.FontLoader;
 import interius.tiles.TileMapLoader;
 
 public class GameStateTerrain extends GameState {
     private SpriteBatch batch;
+    private SpriteBatch batchGUI;
     private OrthographicCamera camera;
-    private Viewport viewport;
+    private ScreenViewport viewport;
     
     private TileMapLoader map;
+    
+    private float zoom = 1.5f;
 
     public GameStateTerrain(String worldPath)
     {
@@ -23,25 +25,45 @@ public class GameStateTerrain extends GameState {
     
     public void create() {
         batch = new SpriteBatch();
-        camera = new OrthographicCamera(1280, 720);
-        camera.setToOrtho(false, 1280, 720);
-        viewport = new ScreenViewport(camera);
+        batchGUI = new SpriteBatch();
         
+        camera = new OrthographicCamera(1280, 720);
+        camera.setToOrtho(false);
+        viewport = new ScreenViewport(camera);
+        viewport.setUnitsPerPixel(1/zoom);
+
         map.create(camera);
+    }
+    
+    public void update() {
+        camera.translate(1, 1);
+        camera.update();
     }
 
     public void render() {
-        camera.update();
+        
         batch.setProjectionMatrix(camera.combined);
         batch.setTransformMatrix(camera.view);
-        
-        batch.begin();
+
         map.render();
-        
-        FontLoader.defaultFont.draw(batch, new Integer(Gdx.graphics.getFramesPerSecond()).toString(), 
-                -1280/2 + 20, 720/2 - 20);
+        renderElements();
+        renderGUI();
+    }
+    
+    private void renderElements()
+    {
+        batch.begin();
         
         batch.end();
+    }
+    
+    private void renderGUI()
+    {
+        batchGUI.begin();
+        
+        FontLoader.defaultFont.draw(batchGUI, new Integer(Gdx.graphics.getFramesPerSecond()).toString(), 500, 500);
+        
+        batchGUI.end();
     }
 
     public void dispose() {

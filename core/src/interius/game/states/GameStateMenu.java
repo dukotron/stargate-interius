@@ -19,6 +19,10 @@ public class GameStateMenu extends GameState {
         camera = new OrthographicCamera(1280, 720);
         viewport = new ScreenViewport(camera);
     }
+    
+    public void update() {
+        
+    }
 
     public void render() {
         camera.update();

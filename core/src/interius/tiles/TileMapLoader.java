@@ -23,9 +23,19 @@ public class TileMapLoader {
         tiledMapRenderer.setView(camera);
     }
     
-    // mozda u argumente gdje je kamera? pogledati kako radi libgdx kamera
     public void render() {
+        tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
+    }
+    
+    public int getWidth()
+    {
+        return (Integer) map.getProperties().get("width");   
+    }
+    
+    public int getHeight()
+    {
+        return (Integer) map.getProperties().get("height");
     }
     
     public void dispose() {

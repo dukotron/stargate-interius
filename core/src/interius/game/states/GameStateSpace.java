@@ -24,6 +24,10 @@ public class GameStateSpace extends GameState{
         
         img = new Texture("badlogic.jpg");
     }
+    
+    public void update() {
+        
+    }
 
     public void render() {
         camera.update();
