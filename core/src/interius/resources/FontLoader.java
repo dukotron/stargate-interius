@@ -14,7 +14,7 @@ public class FontLoader {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
         
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 12;
+        parameter.size = 14;
         defaultFont = generator.generateFont(parameter);
         
         generator.dispose();

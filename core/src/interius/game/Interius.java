@@ -5,17 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 import interius.game.states.GameState;
-import interius.game.states.GameStateSpace;
+import interius.game.states.GameStateTerrain;
 import interius.resources.FontLoader;
 
-public class Interius extends ApplicationAdapter {
+public class Interius extends ApplicationAdapter  {
 
     private GameState currentState;
     
     @Override
     public void create() {
         FontLoader.initialize();
-        setState(new GameStateSpace());
+        setState(new GameStateTerrain("maptest.tmx"));
     }
 
     @Override

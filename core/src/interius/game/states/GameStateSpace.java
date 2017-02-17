@@ -11,15 +11,17 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import interius.resources.FontLoader;
 
 public class GameStateSpace extends GameState{
-    private Texture img;
-    private Viewport viewport;
-    private Camera camera;
     private SpriteBatch batch;
+    private Camera camera;
+    private Viewport viewport;
+    
+    private Texture img;
 
     public void create() {
         batch = new SpriteBatch();
         camera = new OrthographicCamera(1280, 720);
         viewport = new ExtendViewport(1280, 720, camera);
+        
         img = new Texture("badlogic.jpg");
     }
 
@@ -32,8 +34,8 @@ public class GameStateSpace extends GameState{
         
         
         batch.draw(img, 0, 0);
-        FontLoader.defaultFont.draw(batch, new Integer(Gdx.graphics.getFramesPerSecond()).toString(), -1280/2 + 20, 720/2 - 20);
-      //          (-viewport.getScreenWidth() / 2) + 5, (viewport.getScreenHeight() / 2) - 5);
+        FontLoader.defaultFont.draw(batch, new Integer(Gdx.graphics.getFramesPerSecond()).toString(), 
+                -1280/2 + 20, 720/2 - 20);
         
         
         batch.end();
@@ -44,7 +46,7 @@ public class GameStateSpace extends GameState{
         batch.dispose();
     }
     
-    public void resize(int width, int height) {
-        viewport.update(width, height);
+    public void resize(int w, int h) {
+        viewport.update(w, h);
     }
 }
