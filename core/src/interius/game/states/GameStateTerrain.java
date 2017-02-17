@@ -1,7 +1,7 @@
 package interius.game.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,8 +19,7 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     private TileMapLoader map;
     
     private float zoom = 1.5f;
-    private float camSpeedX = 0f;
-    private float camSpeedY = 0f;
+    private float camSpeed = 3f;
 
     public GameStateTerrain(String worldPath)
     {
@@ -41,6 +40,14 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     }
     
     public void update() {
+        float camSpeedX = 0f, camSpeedY = 0f;
+        if(Gdx.input.isKeyPressed(Keys.RIGHT)) camSpeedX =  camSpeed;
+        if(Gdx.input.isKeyPressed(Keys.LEFT))  camSpeedX = -camSpeed;
+        if(Gdx.input.isKeyPressed(Keys.UP))    camSpeedY =  camSpeed;
+        if(Gdx.input.isKeyPressed(Keys.DOWN))  camSpeedY = -camSpeed;
+        if(Gdx.input.isKeyPressed(Keys.RIGHT) && Gdx.input.isKeyPressed(Keys.LEFT)) camSpeedX = 0f;
+        if(Gdx.input.isKeyPressed(Keys.UP)    && Gdx.input.isKeyPressed(Keys.DOWN)) camSpeedX = 0f;
+        
         camera.translate(camSpeedX, camSpeedY);
         camera.update();
     }
@@ -80,30 +87,8 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         viewport.update(w, h);
     }
     
-    public boolean keyDown(int keycode) {
-        if(keycode == Input.Keys.LEFT)
-            camSpeedX = -3f;
-        if(keycode == Input.Keys.RIGHT)
-            camSpeedX = 3f;
-        if(keycode == Input.Keys.UP)
-            camSpeedY = 3f;
-        if(keycode == Input.Keys.DOWN)
-            camSpeedY = -3f;
-        return false;
-    }
-    
-    public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.LEFT)
-            camSpeedX = 0f;
-        if(keycode == Input.Keys.RIGHT)
-            camSpeedX = 0f;
-        if(keycode == Input.Keys.UP)
-            camSpeedY = 0f;
-        if(keycode == Input.Keys.DOWN)
-            camSpeedY = 0f;
-        return false; 
-    }
-    
+    public boolean keyDown(int keycode) { return false; }
+    public boolean keyUp(int keycode) { return false; }
     public boolean keyTyped(char character) { return false; }
     public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
     public boolean touchUp(int screenX, int screenY, int pointer, int button) { return false; }
