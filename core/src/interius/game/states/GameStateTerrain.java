@@ -16,8 +16,8 @@ public class GameStateTerrain extends GameState {
         map.create();
     }
 
-    public void render(SpriteBatch batch) {
-        map.render(batch);
+    public void render() {
+        //map.render();
     }
 
     public void dispose() {

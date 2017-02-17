@@ -8,7 +8,7 @@ public class GameStateMenu extends GameState {
         
     }
 
-    public void render(SpriteBatch batch) {
+    public void render() {
         
     }
 
