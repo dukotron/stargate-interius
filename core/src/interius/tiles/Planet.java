@@ -86,6 +86,13 @@ public class Planet {
         
         return units;
     }
+    
+    public void selectNPC(float x, float y) {
+        for (PersonNPC p : npcs) {
+            if (p.getBoundingBox().contains(x, y))
+                System.out.println("Clicked npc");
+        }
+    }
 
     public void dispose()
     {

@@ -34,5 +34,4 @@ public abstract class PersonNPC extends Person {
     public void dispose() {
         
     }
-    
 }

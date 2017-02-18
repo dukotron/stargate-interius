@@ -131,6 +131,7 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         if(button == Input.Buttons.LEFT) {
             mouseDragRegion.x = worldPos.x;
             mouseDragRegion.y = worldPos.y;
+            planet.selectNPC(worldPos.x, worldPos.y);
         }
         else if(button == Input.Buttons.RIGHT) {
             // maybe tell all units to go to a specific place?
