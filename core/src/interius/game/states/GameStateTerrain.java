@@ -137,7 +137,7 @@ public class GameStateTerrain extends GameState implements InputProcessor{
             // tell them what action to do
             // if more than one, give some formation
             for(PersonCrew p : selectedUnits) {
-                p.walkTo(worldPos.x - 16, worldPos.y - 16);
+                p.walkTo(worldPos.x, worldPos.y);
             }
         }
         return false;
