@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import interius.resources.FontLoader;
-import interius.tiles.TileMapLoader;
+import interius.tiles.Planet;
 
 public class GameStateTerrain extends GameState implements InputProcessor{
     private SpriteBatch batch;
@@ -16,14 +16,13 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     private OrthographicCamera camera;
     private ScreenViewport viewport;
     
-    private TileMapLoader map;
+    private Planet planet;
     
-    private float zoom = 1.5f;
+    private float zoom = 1.3f;
     private float camSpeed = 3f;
 
-    public GameStateTerrain(String worldPath)
-    {
-        map = new TileMapLoader(worldPath);
+    public GameStateTerrain(String worldPath) {
+        planet = new Planet(worldPath);
     }
     
     public void create() {
@@ -36,7 +35,7 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         viewport = new ScreenViewport(camera);
         viewport.setUnitsPerPixel(1/zoom);
 
-        map.create(camera);
+        planet.create(camera);
     }
     
     public void update() {
@@ -50,27 +49,19 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         
         camera.translate(camSpeedX, camSpeedY);
         camera.update();
+        
+        planet.update();
     }
 
     public void render() {
-        
         batch.setProjectionMatrix(camera.combined);
-        batch.setTransformMatrix(camera.view);
 
-        map.render();
-        renderElements();
+        planet.renderTerrain();
+        planet.renderPeople();
         renderGUI();
     }
     
-    private void renderElements()
-    {
-        batch.begin();
-        
-        batch.end();
-    }
-    
-    private void renderGUI()
-    {
+    private void renderGUI() {
         batchGUI.begin();
         
         FontLoader.defaultFont.draw(batchGUI, new Integer(Gdx.graphics.getFramesPerSecond()).toString(), 
@@ -80,7 +71,7 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     }
 
     public void dispose() {
-        map.dispose();
+        planet.dispose();
     }
 
     public void resize(int w, int h) {

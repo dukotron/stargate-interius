@@ -28,13 +28,11 @@ public class TileMapLoader {
         tiledMapRenderer.render();
     }
     
-    public int getWidth()
-    {
+    public int getWidth() {
         return (Integer) map.getProperties().get("width");   
     }
     
-    public int getHeight()
-    {
+    public int getHeight() {
         return (Integer) map.getProperties().get("height");
     }
     
