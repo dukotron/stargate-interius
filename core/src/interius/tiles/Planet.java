@@ -77,8 +77,12 @@ public class Planet {
         Rectangle region = new Rectangle(minx, miny, maxx - minx, maxy - miny);
 
         for(PersonCrew p : crew)
-            if(region.overlaps(p.getBoundingBox()))
+            if(region.overlaps(p.getBoundingBox())) {
                 units.add(p);
+                p.setSelected(true);
+            }else{
+                p.setSelected(false);
+            }
         
         return units;
     }

@@ -1,12 +1,17 @@
 package interius.entities.onfield;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Person {
     protected Sprite sprite;
+    protected TextureRegion[] animationFrames;
+    protected Animation<TextureRegion> animation;
+    protected float elapsedTime;
     protected Vector2 pos;
     protected float speed = 3f;
     protected Rectangle boundingBox;
