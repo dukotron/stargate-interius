@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import interius.entities.onfield.NPCDummy;
+import interius.entities.onfield.PersonNPC;
 
 public class TileMapLoader {
     private OrthographicCamera camera;
@@ -19,7 +20,7 @@ public class TileMapLoader {
     private TiledMap map;
     private TiledMapRenderer tiledMapRenderer;
     
-    private ArrayList<NPCDummy> npcs;
+    private ArrayList<PersonNPC> npcs;
     
     public TileMapLoader(String path) {
         map = new TmxMapLoader().load(path);
@@ -45,8 +46,8 @@ public class TileMapLoader {
         return (Integer) map.getProperties().get("height");
     }
     
-    public ArrayList<NPCDummy> getNPCS() {
-        npcs = new ArrayList<NPCDummy>();
+    public ArrayList<PersonNPC> getNPCs() {
+        npcs = new ArrayList<PersonNPC>();
         
         for (MapObject mo : map.getLayers().get("objects").getObjects()) {
             if (mo instanceof RectangleMapObject) {
