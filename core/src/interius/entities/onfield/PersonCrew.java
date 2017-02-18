@@ -12,6 +12,8 @@ public abstract class PersonCrew extends Person {
     protected TextureRegion[] animationFrames;
     protected Animation<TextureRegion> animation;
     protected float animationTime;
+    protected float currRotation;
+    private float currSpeed;
     
     protected Vector2 targetPos;
     protected boolean isSelected;
@@ -35,21 +37,43 @@ public abstract class PersonCrew extends Person {
             animationFrames[i] = tmpFrames[0][i];
         
         animation = new Animation<TextureRegion>(1/4f, animationFrames);
+        
+        currRotation = sprite.getRotation() - 90;
+        currSpeed = 0f;
     }
     
     @Override
     public void update() {
+        float minDistToMove = 0.5f;
+        
         Vector2 dir = targetPos.cpy();
         dir.sub(pos);
-        if(dir.len() > speed) dir.nor();
-        dir.scl(speed);
+        if(dir.len() > minDistToMove) dir.nor();
         
-        pos.add(dir);
+        Vector2 dirScaled = dir.cpy();
+        dirScaled.scl(currSpeed);
+
+        float deltaAng = dir.angle() - currRotation;
+        while(deltaAng > 180) deltaAng -= 360;
+        while(deltaAng < -180) deltaAng += 360;
+        deltaAng /= 20f;
         
-        if(dir.len() > 0.3) {
-            sprite.setRotation(dir.angle() + 90);
+        if(Math.abs(deltaAng) < 1f)
+            pos.add(dirScaled);
+        else currSpeed -= acceleration;
+        
+        if(dir.len() > minDistToMove) {
+            currRotation += deltaAng;
+            
+            if(Math.abs(deltaAng) < 1) currSpeed += acceleration;
+            if(currSpeed > speed) currSpeed = speed;
+            
+            sprite.setRotation(currRotation + 90);
             animationTime += Gdx.graphics.getDeltaTime();
         }
+        else currSpeed -= acceleration;
+        
+        if(currSpeed < 0) currSpeed = 0f;
     }
     
     @Override

@@ -21,7 +21,7 @@ public class TileMapLoader {
     private TiledMap map;
     private TiledMapTileLayer collisionLayer;
     private TiledMapRenderer tiledMapRenderer;
-    private boolean[][] collision;
+    private boolean[][] isCollidable;
     
     public TileMapLoader(String path) {
         map = new TmxMapLoader().load(path);
@@ -32,15 +32,15 @@ public class TileMapLoader {
         
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
         tiledMapRenderer.setView(camera);
+        
         collisionLayer = (TiledMapTileLayer) map.getLayers().get("collision");
-        collision = new boolean[getHeight()][getWidth()];
-        for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getWidth(); j++) {
-                System.out.println(i + " " + j + " " + collisionLayer.getCell(j, i));
-                if (collisionLayer.getCell(i, j) == null)
-                    collision[i][j] = false;
+        isCollidable = new boolean[getHeight()][getWidth()];
+        for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                if (collisionLayer.getCell(x, y) == null)
+                    isCollidable[x][y] = false;
                 else
-                    collision[i][j] = true;
+                    isCollidable[x][y] = true;
             }
         }
     }
@@ -71,8 +71,8 @@ public class TileMapLoader {
         return npcs;
     }
     
-    public boolean isCollideable(int height, int width) {
-        return collision[height][width];
+    public boolean isCollidable(int x, int y) {
+        return isCollidable[x][y];
     }
     
     public void dispose() {

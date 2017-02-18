@@ -9,6 +9,7 @@ public abstract class Person {
     protected Sprite sprite;
     protected Vector2 pos;
     protected float speed = 1f;
+    protected float acceleration = 0.02f;
     
     public Person() {}
     public abstract void create();
