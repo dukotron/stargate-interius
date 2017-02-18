@@ -11,6 +11,7 @@ public class CrewScientist extends PersonCrew {
 
     public CrewScientist(float x, float y) {
         pos = new Vector2(x, y);
+        targetPos = pos;
         this.create();
     }
     
@@ -23,8 +24,13 @@ public class CrewScientist extends PersonCrew {
 
     @Override
     public void update() {
-        pos.x += 1f;
+        Vector2 dir = targetPos.cpy();
+        dir.sub(pos);
+        if(dir.len() > speed) dir = dir.nor();
+        pos = pos.add(dir);
+        
         boundingBox.x = pos.x;
+        boundingBox.y = pos.y;
     }
 
     @Override
@@ -36,5 +42,10 @@ public class CrewScientist extends PersonCrew {
     @Override
     public void dispose() {
 
+    }
+
+    @Override
+    public void walkTo(float x, float y) {
+        targetPos = new Vector2(x, y);
     }
 }

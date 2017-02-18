@@ -27,4 +27,10 @@ public class CrewSoldier extends PersonCrew {
         // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void walkTo(float x, float y) {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -77,7 +78,6 @@ public class GameStateTerrain extends GameState implements InputProcessor{
             
             selectedUnits = planet.getSelectedUnits(mouseDragRegion);
         }
-        else selectedUnits.clear();
         
         planet.update();
     }
@@ -125,10 +125,20 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
+        Vector2 worldPos = new Vector2(pos.x, pos.y);
+        
         if(button == Input.Buttons.LEFT) {
-            Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
-            mouseDragRegion.x = pos.x;
-            mouseDragRegion.y = pos.y;
+            mouseDragRegion.x = worldPos.x;
+            mouseDragRegion.y = worldPos.y;
+        }
+        else if(button == Input.Buttons.RIGHT) {
+            // maybe tell all units to go to a specific place?
+            // tell them what action to do
+            // if more than one, give some formation
+            for(PersonCrew p : selectedUnits) {
+                p.walkTo(worldPos.x, worldPos.y);
+            }
         }
         return false;
     }

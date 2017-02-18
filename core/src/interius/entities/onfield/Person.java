@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Person {
     protected Sprite sprite;
     protected Vector2 pos;
+    protected float speed = 3f;
     protected Rectangle boundingBox;
     
     public Person() {}
