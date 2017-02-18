@@ -4,33 +4,27 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class CrewCivilian extends PersonCrew {
 
+    public CrewCivilian(float x, float y) {
+        super(x, y);
+    }
+    
     @Override
     public void create() {
-        // TODO Auto-generated method stub
-        
+        super.create();
     }
-
+    
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        
+        super.update();
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        // TODO Auto-generated method stub
-        
+        super.render(batch);
     }
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void walkTo(float x, float y) {
-        // TODO Auto-generated method stub
-        
+        super.dispose();
     }
 }

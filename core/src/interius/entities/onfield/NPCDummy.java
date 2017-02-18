@@ -1,39 +1,31 @@
 package interius.entities.onfield;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 
-public class NPCDummy extends PersonNPC{
+public class NPCDummy extends PersonNPC {
     
     public NPCDummy(float x, float y) {
-        pos = new Vector2(x, y);
-        this.create();
+        super(x, y);
     }
     
     @Override
     public void create() {
-        Texture texture = new Texture(Gdx.files.internal("blacksquare.png"));
-        sprite = new Sprite(texture, 32, 32);
-        boundingBox = new Rectangle(pos.x, pos.y, 32, 32);
+        super.create();
     }
 
     @Override
     public void update() {
+        super.update();
         //pos.x += 1f;
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        sprite.setPosition(pos.x, pos.y);
-        sprite.draw(batch);
+        super.render(batch);
     }
 
     @Override
     public void dispose() {
-
+        super.dispose();
     }
 }
