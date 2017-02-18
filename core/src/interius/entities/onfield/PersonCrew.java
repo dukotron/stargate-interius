@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+import interius.resources.ShaderLoader;
+
 public abstract class PersonCrew extends Person {
     protected TextureRegion[] animationFrames;
     protected Animation<TextureRegion> animation;
@@ -19,8 +21,6 @@ public abstract class PersonCrew extends Person {
     
     protected Vector2 targetPos;
     protected boolean isSelected;
-    
-    protected ShaderProgram shaderOutline;
     
     public PersonCrew(float x, float y) {
         pos = new Vector2(x, y);
@@ -45,7 +45,6 @@ public abstract class PersonCrew extends Person {
         currRotation = sprite.getRotation() - 90;
         currSpeed = 0f;
     }
-    
     @Override
     public void update() {
         float minDistToMove = 0.5f;
@@ -79,16 +78,7 @@ public abstract class PersonCrew extends Person {
         
         if(currSpeed < 0) currSpeed = 0f;
         
-        String vertexShader = Gdx.files.internal("vertex.glsl").readString();
-        String fragmentShader = Gdx.files.internal("fragment.glsl").readString();
-        shaderOutline = new ShaderProgram(vertexShader, fragmentShader);
-        
-        shaderOutline.begin();
-        shaderOutline.setUniformf("u_viewportInverse", new Vector2(1f / 512f, 1f / 512f));
-        shaderOutline.setUniformf("u_offset", 1f);
-        shaderOutline.setUniformf("u_step", Math.min(1f, 512f / 70f));
-        shaderOutline.setUniformf("u_color", new Vector3(0, 0, 1f));
-        shaderOutline.end();
+
     }
     
     @Override
@@ -100,7 +90,7 @@ public abstract class PersonCrew extends Person {
         sprite.draw(batch);
         
         if (isSelected) {
-            batch.setShader(shaderOutline);
+            batch.setShader(ShaderLoader.shaderOutline);
 
             sprite.setRegion(animation.getKeyFrame(animationTime, true));
             sprite.setPosition(pos.x, pos.y);

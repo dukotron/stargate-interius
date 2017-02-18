@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import interius.game.states.GameState;
 import interius.game.states.GameStateTerrain;
 import interius.resources.FontLoader;
+import interius.resources.ShaderLoader;
 
 public class Interius extends ApplicationAdapter  {
 
@@ -15,6 +16,8 @@ public class Interius extends ApplicationAdapter  {
     @Override
     public void create() {
         FontLoader.initialize();
+        ShaderLoader.initialize();
+        
         setState(new GameStateTerrain("maptest.tmx"));
     }
     
