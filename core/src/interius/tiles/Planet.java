@@ -11,7 +11,7 @@ public class Planet {
     private TileMapLoader map;
     
     private ArrayList<PersonCrew> crew;
-    private ArrayList<PersonNPC> npcs;
+    private ArrayList<NPCDummy> npcs;
     
     private OrthographicCamera camera;
     private SpriteBatch personsBatch;
@@ -21,11 +21,12 @@ public class Planet {
         personsBatch = new SpriteBatch();
         
         crew = new ArrayList<PersonCrew>();
-        npcs = new ArrayList<PersonNPC>();
+        npcs = new ArrayList<NPCDummy>();
         
         
         // @TODO - load crew which is on this planet and set their positions
         // also load npcs supposed to be on this planet
+        npcs = map.getNPCS();
         crew.add(new CrewScientist(0, 20*16));
         crew.add(new CrewScientist(34, 20*16));
         crew.add(new CrewScientist(68, 20*16));
@@ -57,7 +58,7 @@ public class Planet {
         return crew;
     }
     
-    public ArrayList<PersonNPC> getNPCS() {
+    public ArrayList<NPCDummy> getNPCS() {
         return npcs;
     }
 

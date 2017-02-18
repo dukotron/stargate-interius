@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="8">
  <tileset firstgid="1" name="public_tileset_by_orohnpokemon-d4vpcfu" tilewidth="16" tileheight="16" tilecount="2376" columns="54">
   <image source="public_tileset_by_orohnpokemon-d4vpcfu.png" width="864" height="705"/>
  </tileset>
@@ -211,4 +211,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="objects">
+  <object id="4" x="608" y="720" width="32" height="32"/>
+  <object id="6" x="688" y="720" width="32" height="32"/>
+  <object id="7" x="656" y="768" width="32" height="32"/>
+ </objectgroup>
 </map>

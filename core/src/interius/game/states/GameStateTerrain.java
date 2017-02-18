@@ -19,7 +19,7 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     private Planet planet;
     
     private float zoom = 1.3f;
-    private float camSpeed = 3f;
+    private float camSpeed = 4f;
 
     public GameStateTerrain(String worldPath) {
         planet = new Planet(worldPath);
