@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class NPCDummy extends PersonNPC{
@@ -17,6 +18,7 @@ public class NPCDummy extends PersonNPC{
     public void create() {
         Texture texture = new Texture(Gdx.files.internal("blacksquare.png"));
         sprite = new Sprite(texture, 32, 32);
+        boundingBox = new Rectangle(pos.x, pos.y, 32, 32);
     }
 
     @Override

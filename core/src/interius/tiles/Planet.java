@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 import interius.entities.onfield.*;
 
@@ -61,6 +62,26 @@ public class Planet {
     public ArrayList<PersonNPC> getNPCs() {
         return npcs;
     }
+    
+    public ArrayList<PersonCrew> getSelectedUnits(Rectangle dragRegion) {
+        ArrayList<PersonCrew> units = new ArrayList<PersonCrew>();
+        
+        // Rectangle.overlaps(Rectangle r) doesn't work with negative width/height
+        // Creating new one to fix
+
+        float minx = Math.min(dragRegion.x, dragRegion.x + dragRegion.width);
+        float maxx = Math.max(dragRegion.x, dragRegion.x + dragRegion.width);
+        float miny = Math.min(dragRegion.y, dragRegion.y + dragRegion.height);
+        float maxy = Math.max(dragRegion.y, dragRegion.y + dragRegion.height);
+        
+        Rectangle region = new Rectangle(minx, miny, maxx - minx, maxy - miny);
+
+        for(PersonCrew p : crew)
+            if(region.overlaps(p.getBoundingBox()))
+                units.add(p);
+        
+        return units;
+    }
 
     public void dispose()
     {
@@ -68,4 +89,6 @@ public class Planet {
         npcs.clear();
         crew.clear();
     }
+
+
 }

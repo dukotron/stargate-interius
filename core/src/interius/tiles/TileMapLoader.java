@@ -20,8 +20,6 @@ public class TileMapLoader {
     private TiledMap map;
     private TiledMapRenderer tiledMapRenderer;
     
-    private ArrayList<PersonNPC> npcs;
-    
     public TileMapLoader(String path) {
         map = new TmxMapLoader().load(path);
     }
@@ -47,7 +45,7 @@ public class TileMapLoader {
     }
     
     public ArrayList<PersonNPC> getNPCs() {
-        npcs = new ArrayList<PersonNPC>();
+        ArrayList<PersonNPC> npcs = new ArrayList<PersonNPC>();
         
         for (MapObject mo : map.getLayers().get("objects").getObjects()) {
             if (mo instanceof RectangleMapObject) {

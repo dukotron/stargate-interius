@@ -1,12 +1,22 @@
 package interius.game.states;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import interius.entities.onfield.*;
 import interius.resources.FontLoader;
 import interius.tiles.Planet;
 
@@ -20,6 +30,11 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     
     private float zoom = 1.3f;
     private float camSpeed = 4f;
+    
+    private ArrayList<PersonCrew> selectedUnits = new ArrayList<PersonCrew>();
+    private ShapeRenderer dragRegionRenderer;
+    private boolean mouseDown = false;
+    private Rectangle mouseDragRegion = new Rectangle(0, 0, 0, 0);
 
     public GameStateTerrain(String worldPath) {
         planet = new Planet(worldPath);
@@ -34,6 +49,8 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         camera.setToOrtho(false);
         viewport = new ScreenViewport(camera);
         viewport.setUnitsPerPixel(1/zoom);
+        
+        dragRegionRenderer = new ShapeRenderer();
 
         planet.create(camera);
     }
@@ -50,6 +67,18 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         camera.translate(camSpeedX, camSpeedY);
         camera.update();
         
+        mouseDown = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
+        if(mouseDown) {
+            Vector3 size = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+            size.x -= mouseDragRegion.x;
+            size.y -= mouseDragRegion.y;
+            mouseDragRegion.width = size.x;
+            mouseDragRegion.height = size.y;
+            
+            selectedUnits = planet.getSelectedUnits(mouseDragRegion);
+        }
+        else selectedUnits.clear();
+        
         planet.update();
     }
 
@@ -58,6 +87,22 @@ public class GameStateTerrain extends GameState implements InputProcessor{
 
         planet.renderTerrain();
         planet.renderPeople();
+        
+        batch.begin();
+
+        if(mouseDown) {
+            Gdx.gl.glEnable(GL30.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL30.GL_SRC_ALPHA, GL30.GL_ONE_MINUS_SRC_ALPHA);
+            dragRegionRenderer.setProjectionMatrix(camera.combined);
+            dragRegionRenderer.begin(ShapeType.Filled);
+            dragRegionRenderer.setColor(new Color(.1f, .1f, 1, 0.3f));
+            dragRegionRenderer.rect(mouseDragRegion.x, mouseDragRegion.y, 0, 0, mouseDragRegion.width, mouseDragRegion.height, 1, 1, 0);
+            dragRegionRenderer.end();
+            Gdx.gl.glDisable(GL30.GL_BLEND);
+        }
+        
+        batch.end();
+        
         renderGUI();
     }
     
@@ -78,13 +123,22 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         viewport.update(w, h);
     }
     
+
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if(button == Input.Buttons.LEFT) {
+            Vector3 pos = camera.unproject(new Vector3(screenX, screenY, 0));
+            mouseDragRegion.x = pos.x;
+            mouseDragRegion.y = pos.y;
+        }
+        return false;
+    }
+    
     public boolean keyDown(int keycode) { return false; }
     public boolean keyUp(int keycode) { return false; }
     public boolean keyTyped(char character) { return false; }
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) { return false; }
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) { return false; }
     public boolean touchDragged(int screenX, int screenY, int pointer) { return false; }
     public boolean mouseMoved(int screenX, int screenY) { return false; }
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) { return false; }
     public boolean scrolled(int amount) { return false; }
 
 }

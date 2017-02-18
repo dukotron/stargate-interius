@@ -27,5 +27,4 @@ public class CrewCivilian extends PersonCrew {
         // TODO Auto-generated method stub
         
     }
-
 }
