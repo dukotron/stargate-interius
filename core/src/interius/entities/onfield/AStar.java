@@ -66,8 +66,7 @@ public class AStar {
         }
     }
     
-    public static void Algorithm(){ 
-        
+    public static void runAlgorithm(){ 
         open.add(grid[startX][startY]);
         Cell current;
         
@@ -124,7 +123,7 @@ public class AStar {
         } 
     }
     
-    public static Queue<int[]> ApplyAlgorithm(int sizeX, int sizeY, int startX, int startY,
+    public static Queue<int[]> getShortestPath(int sizeX, int sizeY, int startX, int startY,
             int endX, int endY, boolean[][] blocked) {
         
         Queue<int[]> result = new LinkedList<int[]>();
@@ -177,7 +176,7 @@ public class AStar {
          } 
          System.out.println();*/
         
-        Algorithm();
+        runAlgorithm();
         
         /*System.out.println("\nScores for cells: ");
         for(int x = 0; x < sizeX; x++) {
@@ -192,16 +191,12 @@ public class AStar {
         System.out.println();*/
          
         if(closed[endX][endY]) {
-             System.out.println("Path: ");
              Cell current = grid[endX][endY];
-             System.out.print(current);
              result.add(current.toIntPair());
              while(current.parent != null){
-                 System.out.print(" -> " + current.parent);
                  result.add(current.parent.toIntPair());
                  current = current.parent;
              } 
-             System.out.println();
         } else 
             System.out.println("No possible path");
         

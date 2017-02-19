@@ -118,11 +118,9 @@ public abstract class PersonCrew extends Person {
     }
     
     public void walkTo(float x, float y) {
-        //umm iz nekog razloga gleda od end prema start al ono samo sam obrnuo pos i dest i dobis normalno
-        path = AStar.ApplyAlgorithm(100, 100, (int) x / 16, (int) y / 16, (int) pos.x / 16, (int) pos.y / 16, planet.getCollision());
+        path = AStar.getShortestPath(100, 100, (int) x / 16, (int) y / 16, (int) pos.x / 16, (int) pos.y / 16, planet.getCollision());
         int[] temp = path.poll();
-        targetPos = new Vector2(temp[0] * 16, temp[1] * 16); //ovako bi trebalo getat values za pos, temp je jer bi dvaput removealo
-        //targetPos = new Vector2(x, y);
+        targetPos = new Vector2(temp[0] * 16, temp[1] * 16);
     }
     
     public void setSelected(boolean s){
