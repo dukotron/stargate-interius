@@ -28,9 +28,9 @@ public class Planet {
         // @TODO - load crew which is on this planet and set their positions
         // also load npcs supposed to be on this planet
         npcs = map.getNPCs();
-        crew.add(new CrewScientist(0, 20*16));
-        crew.add(new CrewScientist(34, 20*16));
-        crew.add(new CrewScientist(68, 20*16));
+        crew.add(new CrewScientist(0, 20*16, this));
+        crew.add(new CrewScientist(34, 20*16, this));
+        crew.add(new CrewScientist(68, 20*16, this));
     }
 
     public void create(OrthographicCamera camera) {
@@ -61,6 +61,10 @@ public class Planet {
     
     public ArrayList<PersonNPC> getNPCs() {
         return npcs;
+    }
+    
+    public boolean[][] getCollision() {
+        return map.getCollideable();
     }
     
     public ArrayList<PersonCrew> getSelectedUnits(Rectangle dragRegion) {

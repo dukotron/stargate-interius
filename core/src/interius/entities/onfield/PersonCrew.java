@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import interius.resources.ShaderLoader;
+import interius.tiles.Planet;
 
 public abstract class PersonCrew extends Person {
     protected TextureRegion[] animationFrames;
@@ -23,8 +24,10 @@ public abstract class PersonCrew extends Person {
     protected boolean isSelected;
     
     protected Queue<int[]> path;
+    protected Planet planet;
     
-    public PersonCrew(float x, float y) {
+    public PersonCrew(float x, float y, Planet p) {
+        this.planet = p;
         pos = new Vector2(x, y);
         targetPos = pos;
         this.create();
@@ -80,6 +83,13 @@ public abstract class PersonCrew extends Person {
         else currSpeed -= acceleration;
         if(currSpeed < 0) currSpeed = 0f;
         
+        if (pos.dst(targetPos) <= 0.5f && pos != targetPos) {
+            if (!path.isEmpty()) {
+                int[] temp = path.poll();
+                //System.out.println(temp[0] + "   " + temp[1]);
+                targetPos = new Vector2(temp[0] * 16, temp[1] * 16);
+            }
+        }
     }
     
     @Override
@@ -109,10 +119,10 @@ public abstract class PersonCrew extends Person {
     
     public void walkTo(float x, float y) {
         //umm iz nekog razloga gleda od end prema start al ono samo sam obrnuo pos i dest i dobis normalno
-        path = AStar.ApplyAlgorithm(100, 100, (int) x / 16, (int) y / 16, (int) pos.x / 16, (int) pos.y / 16, new int[][] {{1, 3}});
-        //int[] temp = path.poll();
-        //targetPos = new Vector2(temp[0] * 16, temp[1] * 16); ovako bi trebalo getat values za pos, temp je jer bi dvaput removealo
-        targetPos = new Vector2(x, y);
+        path = AStar.ApplyAlgorithm(100, 100, (int) x / 16, (int) y / 16, (int) pos.x / 16, (int) pos.y / 16, planet.getCollision());
+        int[] temp = path.poll();
+        targetPos = new Vector2(temp[0] * 16, temp[1] * 16); //ovako bi trebalo getat values za pos, temp je jer bi dvaput removealo
+        //targetPos = new Vector2(x, y);
     }
     
     public void setSelected(boolean s){

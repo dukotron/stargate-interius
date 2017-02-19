@@ -2,10 +2,12 @@ package interius.entities.onfield;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import interius.tiles.Planet;
+
 public class CrewScientist extends PersonCrew {
 
-    public CrewScientist(float x, float y) {
-        super(x, y);
+    public CrewScientist(float x, float y, Planet p) {
+        super(x, y, p);
     }
     
     @Override

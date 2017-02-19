@@ -125,7 +125,7 @@ public class AStar {
     }
     
     public static Queue<int[]> ApplyAlgorithm(int sizeX, int sizeY, int startX, int startY,
-            int endX, int endY, int[][] blocked) {
+            int endX, int endY, boolean[][] blocked) {
         
         Queue<int[]> result = new LinkedList<int[]>();
         grid = new Cell[sizeX][sizeY];
@@ -149,9 +149,17 @@ public class AStar {
         }
         grid[startX][startY].fCost = 0;
         
-        for(int i = 0; i < blocked.length; i++) {
-            setBlocked(blocked[i][0], blocked[i][1]);
+        
+        for (int y = 0; y < sizeY; y++) {
+            for (int x = 0; x < sizeX; x++) {
+                if (blocked[x][y] == true)
+                    setBlocked(x, y);
+            }
         }
+        
+        /*for(int i = 0; i < blocked.length; i++) {
+            setBlocked(blocked[i][0], blocked[i][1]);
+        }*/
         
         /*System.out.println("Grid: ");
          for(int x = 0; x < sizeX; x++) {
