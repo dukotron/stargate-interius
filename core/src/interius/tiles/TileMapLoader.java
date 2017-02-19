@@ -71,6 +71,10 @@ public class TileMapLoader {
         return npcs;
     }
     
+    public boolean[][] getCollideable() {
+        return isCollidable;
+    }
+    
     public boolean isCollidable(int x, int y) {
         return isCollidable[x][y];
     }

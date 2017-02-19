@@ -20,6 +20,8 @@ public abstract class PersonCrew extends Person {
     protected Vector2 targetPos;
     protected boolean isSelected;
     
+    protected int[][] path;
+    
     public PersonCrew(float x, float y) {
         pos = new Vector2(x, y);
         targetPos = pos;
@@ -45,6 +47,7 @@ public abstract class PersonCrew extends Person {
     }
     @Override
     public void update() {
+        
         float minDistToMove = 0.5f;
         
         Vector2 dir = targetPos.cpy();
@@ -75,8 +78,6 @@ public abstract class PersonCrew extends Person {
         else currSpeed -= acceleration;
         
         if(currSpeed < 0) currSpeed = 0f;
-        
-
     }
     
     @Override
@@ -106,6 +107,8 @@ public abstract class PersonCrew extends Person {
     
     public void walkTo(float x, float y) {
         targetPos = new Vector2(x, y);
+        //umm iz nekog razloga gleda od end prema start al ono samo obrnes pos i xy i dobis normalno
+        path = AStar.ApplyAlgorithm(100, 100, (int) pos.x / 16, (int) pos.y / 16, (int) x / 16, (int) y / 16, new int[][] {{1, 3}});
     }
     
     public void setSelected(boolean s){
