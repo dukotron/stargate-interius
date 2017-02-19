@@ -29,7 +29,6 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     
     private Planet planet;
     
-    private float zoom = 1.3f;
     private float camSpeed = 4f;
     
     private ArrayList<PersonCrew> selectedUnits = new ArrayList<PersonCrew>();
@@ -49,7 +48,6 @@ public class GameStateTerrain extends GameState implements InputProcessor{
         camera = new OrthographicCamera(1280, 720);
         camera.setToOrtho(false);
         viewport = new ScreenViewport(camera);
-        viewport.setUnitsPerPixel(1/zoom);
         
         dragRegionRenderer = new ShapeRenderer();
 
