@@ -28,7 +28,7 @@ public abstract class PersonCrew extends Person {
     
     @Override
     public void create() {
-        Texture texture = new Texture(Gdx.files.internal("human_base.png"));
+        Texture texture = new Texture(Gdx.files.internal("sprites/humanbase.png"));
         sprite = new Sprite(texture, 35, 35);
         sprite.setOrigin(sprite.getWidth()/2f, sprite.getHeight()/2f);
         

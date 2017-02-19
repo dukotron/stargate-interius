@@ -17,8 +17,8 @@ public class Planet {
     private OrthographicCamera camera;
     private SpriteBatch personsBatch;
     
-    public Planet(String path) {
-        map = new TileMapLoader(path);
+    public Planet(String name) {
+        map = new TileMapLoader(name);
         personsBatch = new SpriteBatch();
         
         crew = new ArrayList<PersonCrew>();

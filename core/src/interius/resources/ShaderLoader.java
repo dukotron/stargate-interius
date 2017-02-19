@@ -9,8 +9,8 @@ public class ShaderLoader {
     public static ShaderProgram shaderOutline;
     
     public static void initialize() {
-        String vertexShader = Gdx.files.internal("vertex.glsl").readString();
-        String fragmentShader = Gdx.files.internal("fragment.glsl").readString();
+        String vertexShader = Gdx.files.internal("shaders/vertex.glsl").readString();
+        String fragmentShader = Gdx.files.internal("shaders/fragment.glsl").readString();
         shaderOutline = new ShaderProgram(vertexShader, fragmentShader);
         
         shaderOutline.begin();

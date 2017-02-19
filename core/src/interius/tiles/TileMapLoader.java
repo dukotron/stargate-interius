@@ -23,8 +23,8 @@ public class TileMapLoader {
     private TiledMapRenderer tiledMapRenderer;
     private boolean[][] isCollidable;
     
-    public TileMapLoader(String path) {
-        map = new TmxMapLoader().load(path);
+    public TileMapLoader(String name) {
+        map = new TmxMapLoader().load("maps/" + name);
     }
     
     public void create(OrthographicCamera cam) {

@@ -15,7 +15,7 @@ public abstract class PersonNPC extends Person {
     
     @Override
     public void create() {
-        Texture texture = new Texture(Gdx.files.internal("blacksquare.png"));
+        Texture texture = new Texture(Gdx.files.internal("sprites/blacksquare.png"));
         sprite = new Sprite(texture, 32, 32);
     }
 

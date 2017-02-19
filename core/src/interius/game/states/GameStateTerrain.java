@@ -36,8 +36,8 @@ public class GameStateTerrain extends GameState implements InputProcessor{
     private boolean mouseDown = false;
     private Rectangle mouseDragRegion = new Rectangle(0, 0, 0, 0);
 
-    public GameStateTerrain(String worldPath) {
-        planet = new Planet(worldPath);
+    public GameStateTerrain(String worldName) {
+        planet = new Planet(worldName);
     }
     
     public void create() {
