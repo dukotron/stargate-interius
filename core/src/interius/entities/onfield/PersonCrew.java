@@ -1,5 +1,7 @@
 package interius.entities.onfield;
 
+import java.util.Queue;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -20,7 +22,7 @@ public abstract class PersonCrew extends Person {
     protected Vector2 targetPos;
     protected boolean isSelected;
     
-    protected int[][] path;
+    protected Queue<int[]> path;
     
     public PersonCrew(float x, float y) {
         pos = new Vector2(x, y);
@@ -76,8 +78,8 @@ public abstract class PersonCrew extends Person {
             animationTime += Gdx.graphics.getDeltaTime();
         }
         else currSpeed -= acceleration;
-        
         if(currSpeed < 0) currSpeed = 0f;
+        
     }
     
     @Override
@@ -106,9 +108,11 @@ public abstract class PersonCrew extends Person {
     }
     
     public void walkTo(float x, float y) {
+        //umm iz nekog razloga gleda od end prema start al ono samo sam obrnuo pos i dest i dobis normalno
+        path = AStar.ApplyAlgorithm(100, 100, (int) x / 16, (int) y / 16, (int) pos.x / 16, (int) pos.y / 16, new int[][] {{1, 3}});
+        //int[] temp = path.poll();
+        //targetPos = new Vector2(temp[0] * 16, temp[1] * 16); ovako bi trebalo getat values za pos, temp je jer bi dvaput removealo
         targetPos = new Vector2(x, y);
-        //umm iz nekog razloga gleda od end prema start al ono samo obrnes pos i xy i dobis normalno
-        path = AStar.ApplyAlgorithm(100, 100, (int) pos.x / 16, (int) pos.y / 16, (int) x / 16, (int) y / 16, new int[][] {{1, 3}});
     }
     
     public void setSelected(boolean s){

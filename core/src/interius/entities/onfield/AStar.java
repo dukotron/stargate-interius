@@ -1,6 +1,8 @@
 package interius.entities.onfield;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class AStar {
     static class Cell {
@@ -14,8 +16,13 @@ public class AStar {
             this.y = y;
         }
         
+        public int[] toIntPair(){
+            int[] a = {this.x, this.y};
+            return a;
+        }
+        
         @Override
-        public String toString(){
+        public String toString() {
             return "["+this.x+", "+this.y+"]";
         }
     }
@@ -117,10 +124,10 @@ public class AStar {
         } 
     }
     
-    public static int[][] ApplyAlgorithm(int sizeX, int sizeY, int startX, int startY,
+    public static Queue<int[]> ApplyAlgorithm(int sizeX, int sizeY, int startX, int startY,
             int endX, int endY, int[][] blocked) {
         
-        int[][] result = new int[1000][2];
+        Queue<int[]> result = new LinkedList<int[]>();
         grid = new Cell[sizeX][sizeY];
         closed = new boolean[sizeX][sizeY];
         open = new PriorityQueue<>((Object o1, Object o2) -> {
@@ -180,15 +187,11 @@ public class AStar {
              System.out.println("Path: ");
              Cell current = grid[endX][endY];
              System.out.print(current);
-             result[0][0] = current.x;
-             result[0][1] = current.y;
-             int i = 1;
+             result.add(current.toIntPair());
              while(current.parent != null){
                  System.out.print(" -> " + current.parent);
-                 result[i][0] = current.parent.x;
-                 result[i][1] = current.parent.y;
+                 result.add(current.parent.toIntPair());
                  current = current.parent;
-                 i++;
              } 
              System.out.println();
         } else 
