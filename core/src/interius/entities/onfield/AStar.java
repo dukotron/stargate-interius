@@ -85,40 +85,40 @@ public class AStar {
                 neighbour = grid[current.x - 1][current.y];
                 checkAndUpdateCost(current, neighbour, current.fCost + VH_COST); 
 
-                if(current.y - 1 >= 0){                      
+                if(current.y - 1 >= 0) {                      
                     neighbour = grid[current.x - 1][current.y - 1];
                     checkAndUpdateCost(current, neighbour, current.fCost + DIAGONAL_COST); 
                 }
 
-                if(current.y + 1 < grid[0].length){
+                if(current.y + 1 < grid[0].length) {
                     neighbour = grid[current.x - 1][current.y + 1];
                     checkAndUpdateCost(current, neighbour, current.fCost + DIAGONAL_COST); 
                 }
             } 
 
-            if(current.y - 1 >= 0){
+            if(current.y - 1 >= 0) {
                 neighbour = grid[current.x][current.y - 1];
                 checkAndUpdateCost(current, neighbour, current.fCost + VH_COST); 
             }
 
-            if(current.y + 1 < grid[0].length){
+            if(current.y + 1 < grid[0].length) {
                 neighbour = grid[current.x][current.y + 1];
                 checkAndUpdateCost(current, neighbour, current.fCost + VH_COST); 
             }
 
-            if(current.x + 1 < grid.length){
+            if(current.x + 1 < grid.length) {
                 neighbour = grid[current.x + 1][current.y];
                 checkAndUpdateCost(current, neighbour, current.fCost + VH_COST); 
 
-                if(current.y - 1 >= 0){
+               if(current.y - 1 >= 0){
                     neighbour = grid[current.x + 1][current.y - 1];
                     checkAndUpdateCost(current, neighbour, current.fCost + DIAGONAL_COST); 
                 }
                 
-                if(current.y + 1 < grid[0].length){
+                if(current.y + 1 < grid[0].length) {
                     neighbour = grid[current.x + 1][current.y + 1];
                     checkAndUpdateCost(current, neighbour, current.fCost + DIAGONAL_COST); 
-                }  
+                }
             }
         } 
     }
@@ -156,49 +156,16 @@ public class AStar {
             }
         }
         
-        /*for(int i = 0; i < blocked.length; i++) {
-            setBlocked(blocked[i][0], blocked[i][1]);
-        }*/
-        
-        /*System.out.println("Grid: ");
-         for(int x = 0; x < sizeX; x++) {
-             for(int y = 0; y < sizeY; y++) {
-                if(x == startX && y == startY)
-                    System.out.print("SO  ");
-                else if(x==endX && y==endY)
-                    System.out.print("DE  ");
-                else if(grid[x][y] != null)
-                    System.out.printf("%-3d ", 0);
-                else 
-                    System.out.print("BL  "); 
-             }
-             System.out.println();
-         } 
-         System.out.println();*/
-        
         runAlgorithm();
-        
-        /*System.out.println("\nScores for cells: ");
-        for(int x = 0; x < sizeX; x++) {
-            for(int y = 0; y < sizeX; y++) {
-                if(grid[x][y] != null)
-                    System.out.printf("%-3d ", grid[x][y].fCost);
-                else 
-                    System.out.print("BL  ");
-            }
-            System.out.println();
-        }
-        System.out.println();*/
          
         if(closed[endX][endY]) {
              Cell current = grid[endX][endY];
-             result.add(current.toIntPair());
+             //result.add(current.toIntPair());
              while(current.parent != null){
                  result.add(current.parent.toIntPair());
                  current = current.parent;
              } 
-        } else 
-            System.out.println("No possible path");
+        }  
         
         return result;
     }

@@ -87,7 +87,7 @@ public abstract class PersonCrew extends Person {
             if (!path.isEmpty()) {
                 int[] temp = path.poll();
                 //System.out.println(temp[0] + "   " + temp[1]);
-                targetPos = new Vector2(temp[0] * 16, temp[1] * 16);
+                targetPos = new Vector2(temp[0] * 16 - 8, temp[1] * 16 - 8);
             }
         }
     }
@@ -118,9 +118,14 @@ public abstract class PersonCrew extends Person {
     }
     
     public void walkTo(float x, float y) {
-        path = AStar.getShortestPath(100, 100, (int) x / 16, (int) y / 16, (int) pos.x / 16, (int) pos.y / 16, planet.getCollision());
-        int[] temp = path.poll();
-        targetPos = new Vector2(temp[0] * 16, temp[1] * 16);
+        if (!planet.isCollidable((int) x / 16, (int) y / 16)) {
+            path = AStar.getShortestPath(planet.getWidth(), planet.getHeight(), 
+                    (int) x / 16, (int) y / 16, (int) pos.x  / 16 + 1, (int) pos.y / 16 + 1, planet.getCollision());
+            if (!path.isEmpty()) { 
+                int[] temp = path.poll();
+                targetPos = new Vector2(temp[0] * 16 - 8, temp[1] * 16 - 8);
+            }
+        }
     }
     
     public void setSelected(boolean s){

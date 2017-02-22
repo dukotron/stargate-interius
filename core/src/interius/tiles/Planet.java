@@ -67,6 +67,18 @@ public class Planet {
         return map.getCollideable();
     }
     
+    public boolean isCollidable(int x, int y) {
+        return map.isCollidable(x, y);
+    }
+    
+    public int getWidth() {
+        return map.getWidth();
+    }
+    
+    public int getHeight() {
+        return map.getHeight();
+    }
+    
     public ArrayList<PersonCrew> getSelectedUnits(Rectangle dragRegion) {
         ArrayList<PersonCrew> units = new ArrayList<PersonCrew>();
         
